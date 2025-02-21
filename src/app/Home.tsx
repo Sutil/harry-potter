@@ -4,7 +4,9 @@ const Home: React.FC = () => {
   return (
     <div>
       <header>
-        <Link to="/students">Studends</Link>
+        <Link to="/students" className="text-3xl font-bold">
+          Studends
+        </Link>
       </header>
       <Outlet />
     </div>
