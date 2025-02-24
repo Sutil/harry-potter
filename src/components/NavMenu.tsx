@@ -11,32 +11,47 @@ import { useMediaQuery } from "@/lib/hooks/useMediaQuery";
 import { Link } from "react-router";
 
 export const NavMenu: React.FC = () => {
-  const options = ["All Characters", "Students", "Staff"];
+  const options = [
+    {
+      name: "All Characters",
+      link: "/",
+    },
+    {
+      name: "Students",
+      link: "/students",
+    },
+    {
+      name: "Staff",
+      link: "/staff",
+    },
+  ];
 
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
   const [selected, setSelected] = useState(options[0]);
 
-  const otherOptions = options.filter((option) => option !== selected);
+  const otherOptions = options.filter(
+    (option) => option.name !== selected.name
+  );
 
   if (isDesktop) {
     return (
       <NavigationMenu>
         <NavigationMenuList className="gap-8">
           <NavigationMenuItem>
-            <Link to="">
+            <Link to="/">
               <NavigationMenuLink>All Charactes</NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
 
           <NavigationMenuItem>
-            <Link to="">
+            <Link to="/students">
               <NavigationMenuLink>Students</NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
 
           <NavigationMenuItem>
-            <Link to="">
+            <Link to="/staff">
               <NavigationMenuLink>Staff</NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
@@ -49,17 +64,15 @@ export const NavMenu: React.FC = () => {
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>{selected}</NavigationMenuTrigger>
+          <NavigationMenuTrigger>{selected.name}</NavigationMenuTrigger>
           <NavigationMenuContent>
             <div className="flex flex-col">
               {otherOptions.map((option) => (
-                <NavigationMenuLink
-                  key={option}
-                  onClick={() => setSelected(option)}
-                  className="p-3 w-64"
-                >
-                  {option}
-                </NavigationMenuLink>
+                <Link key={option.name} to={option.link} className="w-48 p-3">
+                  <NavigationMenuLink onClick={() => setSelected(option)}>
+                    {option.name}
+                  </NavigationMenuLink>
+                </Link>
               ))}
             </div>
           </NavigationMenuContent>
