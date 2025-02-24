@@ -3,7 +3,7 @@ import { Character } from "../models/character.model";
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://hp-api.onrender.com/api/",
+  baseURL: "https://hp-api.onrender.com/api",
   timeout: 10000,
   headers: {
     "Content-Type": "application/json",
@@ -21,4 +21,21 @@ const queryClient = new QueryClient({
 const getAllCharacters = async (): Promise<Character[]> =>
   api.get<Character[]>("/characters").then((response) => response.data);
 
-export { queryClient, getAllCharacters };
+const getCharacterById = async (id: number): Promise<Character> =>
+  api.get<Character>(`/characters/${id}`).then((response) => response.data);
+
+const getAllStudents = async (): Promise<Character[]> =>
+  api
+    .get<Character[]>("/characters/students")
+    .then((response) => response.data);
+
+const getAllStaff = async (): Promise<Character[]> =>
+  api.get<Character[]>("/characters/staff").then((response) => response.data);
+
+export {
+  queryClient,
+  getAllCharacters,
+  getCharacterById,
+  getAllStudents,
+  getAllStaff,
+};

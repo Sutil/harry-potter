@@ -1,19 +1,15 @@
-import { Link, Outlet } from "react-router";
-import { useGetAllCharacters } from "../lib/api/hooks/query-hooks";
+import { Outlet } from "react-router";
 
 const Home: React.FC = () => {
-  const { data } = useGetAllCharacters();
-
-  console.log(data);
-
   return (
-    <div>
+    <div className="container mx-auto">
       <header>
-        <Link to="/students" className="text-3xl font-bold">
-          Studends
-        </Link>
+        <h1 className="text-3xl font-bold text-center">Harry Potter</h1>
       </header>
-      <Outlet />
+
+      <div className="mt-4">
+        <Outlet />
+      </div>
     </div>
   );
 };
