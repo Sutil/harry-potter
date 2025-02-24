@@ -4,7 +4,7 @@ import Home from "./app/Home";
 import Student from "./app/students/Students";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./lib/api/api";
-import { Characters } from "./app/Characters";
+import { Characters } from "./app/characters/Characters";
 
 function App() {
   return (
