@@ -1,5 +1,7 @@
+import React from "react";
 import type { Preview } from "@storybook/react";
 import "../src/index.css";
+import { MemoryRouter } from "react-router";
 
 const preview: Preview = {
   parameters: {
@@ -29,6 +31,13 @@ const preview: Preview = {
     },
     defaultViewport: "iphone12",
   },
+  decorators: [
+    (Story) => (
+      <MemoryRouter>
+        <Story />
+      </MemoryRouter>
+    ),
+  ],
 };
 
 export default preview;
