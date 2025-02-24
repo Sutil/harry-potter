@@ -17,7 +17,7 @@ export type Character = {
     length: number;
   };
   patronus: string;
-  hogwartsStudent: true;
+  hogwartsStudent: boolean;
   hogwartsStaff: boolean;
   actor: string;
   alternate_actors: string[];
