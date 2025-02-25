@@ -5,7 +5,7 @@ export type Character = {
   species: string;
   gender: string;
   house: string;
-  dateOfBirth: string;
+  dateOfBirth: string | null;
   yearOfBirth: number;
   wizard: true;
   ancestry: string;
@@ -14,7 +14,7 @@ export type Character = {
   wand: {
     wood: string;
     core: string;
-    length: number;
+    length: number | null;
   };
   patronus: string;
   hogwartsStudent: boolean;

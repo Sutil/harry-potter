@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import {
   NavigationMenu,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
 } from "./ui/navigation-menu";
 import { useMediaQuery } from "@/lib/hooks/useMediaQuery";
