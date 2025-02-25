@@ -39,7 +39,7 @@ export const CharacterDetailsPage: React.FC = () => {
 
   return (
     <Container>
-      <div className="flex gap-4">
+      <div className="flex gap-4" data-testid="character-details-page-content">
         <div className="w-32 h-44 rounded-md border overflow-hidden">
           {data?.image ? (
             <img

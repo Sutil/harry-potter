@@ -4,7 +4,6 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useGetAllStudents } from "@/lib/api/hooks/query-hooks";
 import { AlertCircle } from "lucide-react";
-import { Link } from "react-router";
 
 export const StudentsPage: React.FC = () => {
   const { isLoading, isError, data } = useGetAllStudents();
@@ -30,7 +29,10 @@ export const StudentsPage: React.FC = () => {
       )}
 
       {data && (
-        <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-4">
+        <div
+          className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-4"
+          data-testid="students-page-content"
+        >
           {data.map((student) => (
             <CharacterCard character={student} />
           ))}

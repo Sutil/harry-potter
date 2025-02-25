@@ -9,6 +9,7 @@ export const CharacterCard: React.FC<{ character: Character }> = ({
     <Link
       to={`/character/${character.id}`}
       className="hover:scale-105 transition-transform"
+      data-testid={`character-card-${character.name}`}
     >
       <div className="w-full p-5 rounded-lg border">
         <Avatar className="w-full h-52 rounded-md object-cover">

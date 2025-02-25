@@ -88,12 +88,16 @@ export const NavMenu: React.FC = () => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>
+      <DropdownMenuTrigger data-testid="nav-menu-trigger">
         {selected?.name ?? "All characters"}
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         {otherOptions.map((option) => (
-          <Link key={option.name} to={option.link}>
+          <Link
+            key={option.name}
+            to={option.link}
+            data-testid={`menu-item-${option.name}`}
+          >
             <DropdownMenuItem>{option.name}</DropdownMenuItem>
           </Link>
         ))}

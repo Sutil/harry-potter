@@ -29,7 +29,10 @@ export const CharactersPage: React.FC = () => {
       )}
 
       {data && (
-        <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-4">
+        <div
+          className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-4"
+          data-testid="characters-page"
+        >
           {data.map((character) => (
             <CharacterCard character={character} />
           ))}
