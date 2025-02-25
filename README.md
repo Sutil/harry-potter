@@ -1,3 +1,5 @@
+[Access the demo](https://harry-potter-blue.vercel.app/)
+
 ## Intall deps
 
 ```sh
@@ -14,4 +16,10 @@ npm run dev
 
 ```sh
 npm run integration-tests
+```
+
+## Open Storybook
+
+```sh
+npm run storybook
 ```
