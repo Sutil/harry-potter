@@ -21,8 +21,8 @@ const queryClient = new QueryClient({
 const getAllCharacters = async (): Promise<Character[]> =>
   api.get<Character[]>("/characters").then((response) => response.data);
 
-const getCharacterById = async (id: number): Promise<Character> =>
-  api.get<Character>(`/characters/${id}`).then((response) => response.data);
+const getCharacterById = async (id: string): Promise<Character> =>
+  api.get<Character[]>(`/character/${id}`).then((response) => response.data[0]);
 
 const getAllStudents = async (): Promise<Character[]> =>
   api

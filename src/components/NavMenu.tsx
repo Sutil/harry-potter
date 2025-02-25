@@ -1,37 +1,58 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
 } from "./ui/navigation-menu";
 import { useMediaQuery } from "@/lib/hooks/useMediaQuery";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
+
+type OptionLinkType = {
+  name: string;
+  link: string;
+};
+
+const options: OptionLinkType[] = [
+  {
+    name: "All Characters",
+    link: "/",
+  },
+  {
+    name: "Students",
+    link: "/students",
+  },
+  {
+    name: "Staff",
+    link: "/staff",
+  },
+];
 
 export const NavMenu: React.FC = () => {
-  const options = [
-    {
-      name: "All Characters",
-      link: "/",
-    },
-    {
-      name: "Students",
-      link: "/students",
-    },
-    {
-      name: "Staff",
-      link: "/staff",
-    },
-  ];
-
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
-  const [selected, setSelected] = useState(options[0]);
+  const [selected, setSelected] = useState<OptionLinkType | null>(options[0]);
+  const location = useLocation();
+
+  useEffect(() => {
+    const selectedItem = options.find(
+      (option) => option.link === location.pathname
+    );
+    if (selectedItem) {
+      setSelected(selectedItem);
+    } else {
+      setSelected(null);
+    }
+  }, [location]);
 
   const otherOptions = options.filter(
-    (option) => option.name !== selected.name
+    (option) => option.name !== selected?.name
   );
 
   if (isDesktop) {
@@ -39,20 +60,26 @@ export const NavMenu: React.FC = () => {
       <NavigationMenu>
         <NavigationMenuList className="gap-8">
           <NavigationMenuItem>
-            <Link to="/">
-              <NavigationMenuLink>All Charactes</NavigationMenuLink>
+            <Link to="/" className={selected?.link === "/" ? "font-bold" : ""}>
+              All Charactes
             </Link>
           </NavigationMenuItem>
 
           <NavigationMenuItem>
-            <Link to="/students">
-              <NavigationMenuLink>Students</NavigationMenuLink>
+            <Link
+              to="/students"
+              className={selected?.link === "/students" ? "font-bold" : ""}
+            >
+              Students
             </Link>
           </NavigationMenuItem>
 
           <NavigationMenuItem>
-            <Link to="/staff">
-              <NavigationMenuLink>Staff</NavigationMenuLink>
+            <Link
+              to="/staff"
+              className={selected?.link === "/staff" ? "font-bold" : ""}
+            >
+              Staff
             </Link>
           </NavigationMenuItem>
         </NavigationMenuList>
@@ -61,23 +88,17 @@ export const NavMenu: React.FC = () => {
   }
 
   return (
-    <NavigationMenu>
-      <NavigationMenuList>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>{selected.name}</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <div className="flex flex-col">
-              {otherOptions.map((option) => (
-                <Link key={option.name} to={option.link} className="w-48 p-3">
-                  <NavigationMenuLink onClick={() => setSelected(option)}>
-                    {option.name}
-                  </NavigationMenuLink>
-                </Link>
-              ))}
-            </div>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-      </NavigationMenuList>
-    </NavigationMenu>
+    <DropdownMenu>
+      <DropdownMenuTrigger>
+        {selected?.name ?? "All characters"}
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        {otherOptions.map((option) => (
+          <Link key={option.name} to={option.link}>
+            <DropdownMenuItem>{option.name}</DropdownMenuItem>
+          </Link>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };

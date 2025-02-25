@@ -32,9 +32,7 @@ export const StudentsPage: React.FC = () => {
       {data && (
         <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-4">
           {data.map((student) => (
-            <Link key={student.id} to="/todo">
-              <CharacterCard character={student} />
-            </Link>
+            <CharacterCard character={student} />
           ))}
         </div>
       )}
