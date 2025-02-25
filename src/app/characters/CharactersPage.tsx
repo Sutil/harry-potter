@@ -34,7 +34,7 @@ export const CharactersPage: React.FC = () => {
           data-testid="characters-page"
         >
           {data.map((character) => (
-            <CharacterCard character={character} />
+            <CharacterCard key={character.id} character={character} />
           ))}
         </div>
       )}

@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "integration-test": "vite & cypress open --e2e --browser chrome"
+    "integration-tests": "vite & cypress open --e2e --browser chrome"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.3",
