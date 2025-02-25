@@ -1,13 +1,16 @@
 import { Container } from "@/components/Container";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useGetCharacterById } from "@/lib/api/hooks/query-hooks";
-import { AlertCircle } from "lucide-react";
+import { useFavorites } from "@/lib/hooks/useFavorites";
+import { AlertCircle, Star } from "lucide-react";
 import { useParams } from "react-router";
 
 export const CharacterDetailsPage: React.FC = () => {
   const { id } = useParams();
   const { isLoading, isError, data } = useGetCharacterById(id!);
+  const { isFavorite, addFavorite, removeFavorite } = useFavorites();
 
   if (isLoading) {
     return (
@@ -37,14 +40,26 @@ export const CharacterDetailsPage: React.FC = () => {
     );
   }
 
+  if (!data) {
+    return (
+      <Alert variant="destructive" className="mt-4">
+        <AlertCircle className="h-4 w-4" />
+        <AlertTitle>Error</AlertTitle>
+        <AlertDescription>Character not found</AlertDescription>
+      </Alert>
+    );
+  }
+
+  const character = data;
+
   return (
     <Container>
       <div className="flex gap-4" data-testid="character-details-page-content">
         <div className="w-32 h-44 rounded-md border overflow-hidden">
           {data?.image ? (
             <img
-              src={data?.image}
-              alt={data?.name}
+              src={data.image}
+              alt={data.name}
               className="w-auto h-auto object-cover rounded-md m-auto"
             />
           ) : (
@@ -55,7 +70,27 @@ export const CharacterDetailsPage: React.FC = () => {
         </div>
 
         <div>
-          <h1 className="text-xl font-bold">{data?.name}</h1>
+          <div className="flex gap-2 items-center">
+            <h1 className="text-xl font-bold">{data?.name}</h1>
+
+            {isFavorite(character.id) ? (
+              <Button
+                size="icon"
+                variant="ghost"
+                onClick={() => removeFavorite(character.id)}
+              >
+                <Star fill="yellow" />
+              </Button>
+            ) : (
+              <Button
+                size="icon"
+                variant="ghost"
+                onClick={() => addFavorite(character.id)}
+              >
+                <Star />
+              </Button>
+            )}
+          </div>
 
           <div>{data?.house}</div>
           <div>{data?.hogwartsStudent && "Student"}</div>

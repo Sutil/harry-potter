@@ -31,6 +31,14 @@ const options: OptionLinkType[] = [
     name: "Staff",
     link: "/staff",
   },
+  {
+    name: "Favorites",
+    link: "/favorites",
+  },
+  {
+    name: "Prefered Houses",
+    link: "/prefered-houses",
+  },
 ];
 
 export const NavMenu: React.FC = () => {
@@ -79,6 +87,26 @@ export const NavMenu: React.FC = () => {
               className={selected?.link === "/staff" ? "font-bold" : ""}
             >
               Staff
+            </Link>
+          </NavigationMenuItem>
+
+          <NavigationMenuItem>
+            <Link
+              to="/favorites"
+              className={selected?.link === "/favorites" ? "font-bold" : ""}
+            >
+              Favorites
+            </Link>
+          </NavigationMenuItem>
+
+          <NavigationMenuItem>
+            <Link
+              to="/prefered-houses"
+              className={
+                selected?.link === "/prefered-houses" ? "font-bold" : ""
+              }
+            >
+              Prefered Houses
             </Link>
           </NavigationMenuItem>
         </NavigationMenuList>

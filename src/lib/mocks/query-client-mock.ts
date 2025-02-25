@@ -8,7 +8,7 @@ import {
 } from "@tanstack/react-query";
 
 class QueryMock extends Query {
-  constructor(private key: QueryKey, public state: QueryState) {
+  constructor(key: QueryKey, public state: QueryState) {
     super({
       queryKey: key,
       options: {
