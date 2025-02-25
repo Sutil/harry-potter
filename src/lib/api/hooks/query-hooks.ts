@@ -1,5 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { getAllCharacters, getAllStaff, getAllStudents } from "../api";
+import {
+  getAllCharacters,
+  getAllStaff,
+  getAllStudents,
+  getCharacterById,
+} from "../api";
 
 const getAllCharactersQueryKey = ["getAllCharacters"] as const;
 
@@ -24,4 +29,16 @@ const useGetALlStaff = () => {
   });
 };
 
-export { useGetAllCharacters, useGetAllStudents, useGetALlStaff };
+const useGetCharacterById = (id: string) => {
+  return useQuery({
+    queryKey: ["getCharacterById", id],
+    queryFn: () => getCharacterById(id),
+  });
+};
+
+export {
+  useGetAllCharacters,
+  useGetAllStudents,
+  useGetALlStaff,
+  useGetCharacterById,
+};

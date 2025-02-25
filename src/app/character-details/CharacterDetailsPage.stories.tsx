@@ -1,4 +1,5 @@
 import { Meta, StoryFn } from "@storybook/react";
+import { CharacterDetailsPage } from "./CharacterDetailsPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   mockQuery,
@@ -6,11 +7,10 @@ import {
   mockQueryLoading,
 } from "@/lib/mocks/query-client-mock";
 import { charactersMock } from "@/lib/mocks/characters.mock";
-import { CharactersPage } from "./CharactersPage";
 
 const meta = {
-  component: CharactersPage,
-} satisfies Meta<typeof CharactersPage>;
+  component: CharacterDetailsPage,
+} satisfies Meta<typeof CharacterDetailsPage>;
 
 export default meta;
 
@@ -23,36 +23,39 @@ const Template: Story = (args) => {
 
   switch (state) {
     case "loading":
-      queryClient = mockQueryLoading(["getAllCharacters"]);
+      queryClient = mockQueryLoading(["getCharacterById", undefined]);
       break;
     case "success":
-      queryClient = mockQuery(["getAllCharacters"], charactersMock);
+      queryClient = mockQuery(
+        ["getCharacterById", undefined],
+        charactersMock[0]
+      );
       break;
     default:
       queryClient = mockQueryError(
-        ["getAllCharacters"],
-        new Error("Error loading characters")
+        ["getCharacterById", undefined],
+        new Error("Error loading character")
       );
   }
 
   return (
     <QueryClientProvider client={queryClient}>
-      <CharactersPage />
+      <CharacterDetailsPage />
     </QueryClientProvider>
   );
 };
 
-export const Loading = Template.bind({});
+export const Loading: Story = Template.bind({});
 Loading.args = {
   state: "loading",
 };
 
-export const Success = Template.bind({});
+export const Success: Story = Template.bind({});
 Success.args = {
   state: "success",
 };
 
-export const ErrorState = Template.bind({});
+export const ErrorState: Story = Template.bind({});
 ErrorState.args = {
   state: "error",
 };
